@@ -33,8 +33,28 @@ var connect = function (server) {
           if (data.user.geo_enabled) {
             if (data.coordinates !== null || data.place !== null) {
               var tweetObject = data;
-              
+              var topicExists;
+              var hashTagExists;
+
               count++;
+              var scrubbedTweetObject = {
+                name: tweetObject.user['name'],
+                handle: tweetObject.user['screen_name'],
+                // verified: tweetObject.user['verified'],
+                createdAt: tweetObject.user['created_at'],
+                description: tweetObject.user['description'],
+                url: tweetObject.user['url'],
+                hashtags: tweetObject.entities['hashtags'],
+                followers_count: tweetObject.user['followers_count'],
+                coordinates: tweetObject['coordinates'] ? tweetObject['coordinates']['coordinates'] : tweetObject['place']['bounding_box']['coordinates'][0][0],
+                geo: tweetObject['geo'],
+                place: tweetObject['place'],
+                tweetText: tweetObject['text'],
+                tweetTime: tweetObject['created_at'],
+                profileImage: tweetObject['user']['profile_image_url'],
+                // retweet_count: tweetObject['retweet_count'],
+                // favorite_count: tweetObject['favorite_count']
+              };
 
               var databaseTweet = {
                 name: scrubbedTweetObject.handle,
@@ -52,16 +72,20 @@ var connect = function (server) {
                       return filterService.updateFilter();
                     } else {
                       // filter should be an array
+                      // console.log('filter service filter variable: ',filterService.getFilter())
                       return filterService.getFilter();
                     }
                   })
                   .then(function (filter) {
+                    // console.log('inside socket service filter promise: ', filter);
                     if (filter.length > 0) {
                       // for each hash tag in filter
                       for (var i = 0; i < filter.length; i++) {
                         // check if the tweet has the filter hashtag
                         // itterate over tweet's hashtag array
                         for (var j = 0; j < scrubbedTweetObject.hashtags.length; j++) {
+                          // console.log('filter: ', filter[i], ', tweet hashtags: ', scrubbedTweetObject.hashtags);
+                          // console.log('hashtags in this message: ', scrubbedTweetObject.hashtags[j].text)
                           if (filter[i].name.toUpperCase() == scrubbedTweetObject.hashtags[j].text.toUpperCase()) {
                             // attach strength rating, count, and 'related' hashtag to scrubbed tweet object passed to client
                             scrubbedTweetObject['strength'] = filter[i]['strength'];
@@ -73,7 +97,6 @@ var connect = function (server) {
                           }
                         }
                       }
-                    }
                       throw(new Error('Item does not contain filter hashtags'));
                     } else {
                       return scrubbedTweetObject;
@@ -100,6 +123,19 @@ var connect = function (server) {
     socket.emit("connected");
   });
 };
+
+// throw dummy data into database
+// var dummy = function () {
+
+//   var databaseTweet = {
+//     name: "Alex",
+//     hashtags: ['winning', 'obama', 'losing'],
+//   };
+
+//   hashtagsController.addHashtag(databaseTweet)
+//     // filter should be an array
+// }
+// dummy();
 
 module.exports = {
   connect: connect,

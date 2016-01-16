@@ -49,7 +49,7 @@ var getRelatedHashtags = function (hashtagList) {
   })
   // expected input to be array of { hashtags } to the .then block
   .then(function (hashtags) {
-    console.log('hashtags: ', hashtags);
+    // console.log('hashtags: ', hashtags);
     return hashtags.reduce(function (accum, record) {
       record.Users.forEach(function(hashtag) {
         accum.push(hashtag.id);
@@ -100,7 +100,7 @@ var getRelatedHashtags = function (hashtagList) {
     }
     
     setHashtagArray(results);
-    console.log('!!!!!!!results: ', results);
+    // console.log('!!!!!!!results: ', results);
     return results;
   })
 };

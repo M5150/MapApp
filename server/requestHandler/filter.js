@@ -45,8 +45,12 @@ var setThreshold = function(newThreshold){
 
 // update the filter with hashtags associated with the hashtag parameter
 var updateFilter = function (hashtag, threshold) {
+
   hashtag = hashtag || currentHashtag;
   threshold = threshold || currentThreshold;
+
+  console.log('hashtag: ', !!hashtag);
+  console.log(unIgnoreTag(), getIgnoreTags(), getFilter());
 
   if (hashtag) {
     // will return array of hashtags from the database
