@@ -2,9 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var twitterApiController = require('../controllers/twitterApiController.js');
-var UserController = require('../controllers/userController.js');
-var hashtagsController = require('../controllers/hashtagsController.js');
+var UserController = require('../controllers/userController');
+var hashtagsController = require('../controllers/hashtagsController');
 var passport = require('passport');
 var socketService = require('../service/socketService');
 
@@ -40,9 +39,6 @@ router.get('/logout', function (req, res) {
   res.redirect('/signup');
 });
 
-// Handle GET request to Twitter API
-// router.get('/api/tweets/:category', twitterApiController.getTweets);
-
 // Handle PUT request to /api/users (to change favorites)
 router.put('/api/users/:username', function (req, res) {
   console.log('Recevied PUT request from client', req.body);
@@ -55,6 +51,7 @@ router.put('/api/users/:username', function (req, res) {
 
 router.post('/api/hashtag', function (req, res) {
   var hashtag = req.body.hashtag;
+  console.log('hashtag data route length: ', hashtag.length);
   socketService.filterHashtag(hashtag);
   res.end();
 });
@@ -64,6 +61,7 @@ router.param('tag', function (req, res, next, tag){
   req.param.tag = tag;
   next();
 });
+
 router.get('/api/hashtag/:tag', function (req, res, next){
   hashtagsController.completeHashtag(req.param.tag)
   .then(function (suggestions) {

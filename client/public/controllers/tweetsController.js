@@ -31,6 +31,7 @@ angular.module('app.tweets', [])
       $scope.data.message = message;
       $scope.data.show = true;
       console.log(message.image);
+      console.log(message.strength);
       slide();
       $scope.$apply();
     };

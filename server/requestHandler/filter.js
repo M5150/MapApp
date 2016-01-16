@@ -42,11 +42,10 @@ var updateFilter = function (hashtag, threshold) {
               }
             }
             getFilter(result);
-            // console.log('new filter: ', getFilter());
             return result;
           })
         })
-  } else if (hashtag =  '') {
+  } else if (hashtag = '') {
     filter = [];
   } else {
     return getFilter();

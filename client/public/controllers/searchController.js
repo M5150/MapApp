@@ -20,6 +20,8 @@ angular.module('app.search', [])
         mapService.deleteMarkers();
 
         httpService.filterTweets($scope.data.searchText);
+        console.log($scope.data.searchText);
+        $scope.data.searchText = '';
         
         // heatmap = new google.maps.visualization.HeatmapLayer({
         //   radius: 15
