@@ -1,15 +1,22 @@
   <button ng-click="toggleMessage()" class="toggle">
-   •<br><br>
-   •<br><br>
+
+   <br>
    •
+   <br>
+   •
+   <br>
+   •
+   <br>
+   <br>
+
   </button>
   <div class="tweets ng-hide" ng-show="true">
     <div class="headers" ng-show="true">
-      <img class="user-image ng-hide" src="{{ data.message.image }}" ng-show="data.show" />   
-      <h3 class="tweet-user ng-hide" ng-show="data.show">{{ '@' + data.message.name }}</h3>
+      <img class="user-image ng-hide animate-show" src="{{ data.message.image }}" ng-show="data.show" /> 
+      <h3 class="tweet-user ng-hide" ng-show="data.show">{{ '@' + data.message.name}}</h3>
     </div>
     <hr>
-    <p ng-show="data.show" class="tweet-text ng-hide">{{ data.message.tweetText }}</p>
+    <p ng-show="data.show" class="tweet-text ng-hide animate-show" ng-show="data.show">{{data.message.tweetText}}</p>
     <div class="footer">
       <div class="relation" ng-show="data.show">Relation strength: </div>
       <div class="hash-strength" ng-show="data.show">{{ data.message.strength.toPrecision(3) }}</div>

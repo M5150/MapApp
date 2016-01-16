@@ -1,3 +1,20 @@
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 1s;
+}
+
+.animate-show.ng-hide {
+  line-height: 20px;
+  opacity: 0;
+  padding: 0 10px;
+}
+
+
 body, html{
   position:relative;
   height: 100%;
@@ -140,6 +157,7 @@ input[type="text"], textarea, select {
 .user-tweet {
   margin-left: 3px;
   margin-bottom: 3px;
+
 }
 
 hr {
@@ -163,6 +181,7 @@ hr {
   margin-top: 5px;
   bottom: 2px;
   self-align: center;
+  min-width: 200px;
 }
 
 .tweet-text {
@@ -170,6 +189,7 @@ hr {
   margin-left: 4px;
   margin-bottom: 4px;
   margin-top: 3px;
+  width: 200px;
 }
 
 .animate-hide {
@@ -180,6 +200,7 @@ hr {
   float: left;
   width: 30px;
   height: 30px;
+  display: inline-block;
 }
 
 .footer {
