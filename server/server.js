@@ -1,13 +1,12 @@
 // Setup server dependencies
 var express = require('express');
 var path = require('path');
-// var favicon = require('favicon');
+var favicon = require('express-favicon');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require("passport");
 var session = require('express-session');
 var routes = require('./routes/routes');
-// var TwitterAPI = require('./controllers/twitterApiController.js');
 var socketService = require('./service/socketService');
 var db = require('./db/dbModel');
 
@@ -34,6 +33,8 @@ Auth.initialize();
 
 // Setup app and routing
 var app = express();
+
+app.use(favicon(__dirname + '/../client/assets/favicon.ico'));
 
 // Use Session Middleware
 app.use(session({

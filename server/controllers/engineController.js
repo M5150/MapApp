@@ -47,7 +47,7 @@ var getRelatedHashtags = function (hashtagList) {
       record.Users.forEach(function(hashtag) {
         accum.push(hashtag.id);
       })
-      console.log('accumulator: ', accum);
+      // console.log('accumulator: ', accum);
       return accum;
     }, []);
   })
@@ -101,7 +101,3 @@ var getRelatedHashtags = function (hashtagList) {
 module.exports = {
   getRelatedHashtags: getRelatedHashtags
 };
-
-// var testItem = [{id: 1}, {id:2}, {id:3}];
-// var testGRI = getRelatedItems(testItem);
-// console.log(testGRI);
