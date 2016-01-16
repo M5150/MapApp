@@ -33,26 +33,8 @@ var connect = function (server) {
           if (data.user.geo_enabled) {
             if (data.coordinates !== null || data.place !== null) {
               var tweetObject = data;
+              
               count++;
-
-              var scrubbedTweetObject = {
-                name: tweetObject.user['name'],
-                handle: tweetObject.user['screen_name'],
-                createdAt: tweetObject.user['created_at'],
-                description: tweetObject.user['description'],
-                // url: tweetObject.user,
-                urls: tweetObject.entities['urls'],
-                hashtags: tweetObject.entities['hashtags'],
-                followers_count: tweetObject.user['followers_count'],
-                coordinates: tweetObject['coordinates'] ? tweetObject['coordinates']['coordinates'] : tweetObject['place']['bounding_box']['coordinates'][0][0],
-                geo: tweetObject['geo'],
-                place: tweetObject['place'],
-                tweetText: tweetObject['text'],
-                tweetTime: tweetObject['created_at'],
-                profileImage: tweetObject['user']['profile_image_url'],
-                // retweet_count: tweetObject['retweet_count'],
-                // favorite_count: tweetObject['favorite_count']
-              };
 
               var databaseTweet = {
                 name: scrubbedTweetObject.handle,
@@ -67,7 +49,7 @@ var connect = function (server) {
                       count = 0;
                       // returned object will be of the following format...
                         // { name: 'abc', strength: .02923, count: 1234 }
-                      return filterService.updateFilter(filterHashtag());
+                      return filterService.updateFilter();
                     } else {
                       // filter should be an array
                       return filterService.getFilter();
@@ -91,6 +73,7 @@ var connect = function (server) {
                           }
                         }
                       }
+                    }
                       throw(new Error('Item does not contain filter hashtags'));
                     } else {
                       return scrubbedTweetObject;
