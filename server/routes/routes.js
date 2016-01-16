@@ -9,6 +9,9 @@ var socketService = require('../service/socketService');
 var filterService = require('../requestHandler/filter');
 
 
+var Engine = require('../controllers/engineController');
+
+
 var isLoggedIn = function (req, res, next) {
   // if user is authenticated in the session, carry on
   if (req.isAuthenticated()) {
@@ -97,5 +100,6 @@ router.delete('/api/ignore/:tag', function (req, res, next) {
 router.get('/api/ignore', function (req, res, next) {
   res.json(filterService.getIgnoreTags());
 });
+
 
 module.exports = router;

@@ -2,6 +2,7 @@ var app = angular.module('app', [
   'signup', 
   'renderMap',
   'app.tweets',
+  'app.related',
   'app.mapService',
   'app.suggestionsService',
   // 'app.filter',
@@ -25,10 +26,10 @@ $stateProvider
           controller: "tweetsController",
           templateUrl: "client/views/tweetsView.html" 
         },
-        // 'rightDiv': { 
-        //   controller: "filterController",
-        //   templateUrl: "client/views/filterListView.html" 
-        // },
+        'rightDiv': { 
+          controller: "relatedController",
+          templateUrl: "client/views/relatedView.html" 
+        },
         'searchbar': {
           controller: "searchController",
           templateUrl: "client/views/searchView.html"

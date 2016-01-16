@@ -1,6 +1,16 @@
 var model = require('../db/dbModel.js');
 var Promise = require('bluebird');
 
+var hashtagList;
+
+var setHashtagArray = function (hashtagArray) {
+  if (!!hashtagArray) {  
+    hashtagList = hashtagArray;
+  }
+
+  return hashtagList;  
+};
+
 /*
   The heart of the project...
   The order of operations is as follows:
@@ -18,7 +28,6 @@ var Promise = require('bluebird');
    array of:
      { item: { associated item object }, strength: 0.000 - 1.000, count: 123 }
 */
-
 var getRelatedHashtags = function (hashtagList) {
   console.log('hashtag list:', hashtagList);
   // max count for calculating relational strength
@@ -26,10 +35,8 @@ var getRelatedHashtags = function (hashtagList) {
   var hashtagCounts = {};
 
   // translate hashtagList into object for fast referencing
-  // var itemObj = {};
   var hashtagIds = [];
   for (var i = 0; i < hashtagList.length; i++) {
-    // itemObj[hashtagList[i].id] = 1;
     hashtagIds.push(hashtagList[i].id);
   };
 
@@ -47,7 +54,6 @@ var getRelatedHashtags = function (hashtagList) {
       record.Users.forEach(function(hashtag) {
         accum.push(hashtag.id);
       })
-      // console.log('accumulator: ', accum);
       return accum;
     }, []);
   })
@@ -93,11 +99,13 @@ var getRelatedHashtags = function (hashtagList) {
       results.push(hashtagCounts[hashtag]);
     }
     
+    setHashtagArray(results);
     console.log('!!!!!!!results: ', results);
     return results;
   })
 };
 
 module.exports = {
-  getRelatedHashtags: getRelatedHashtags
+  getRelatedHashtags: getRelatedHashtags,
+  setHashtagArray: setHashtagArray
 };

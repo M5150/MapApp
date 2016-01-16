@@ -1,0 +1,13 @@
+<button ng-click="toggleHashList()" class="hash-toggle">
+ •<br><br>
+ •<br><br>
+ •
+</button>
+
+<div class="hash-filters ng-hide" ng-show="data.show">
+  <h2 class="ng-hide" ng-show="data.show">Related</h2>
+  <hr>
+  <p ng-repeat="hashtag in data.relatedHashtags" ng-show="data.show">
+    {{ '#' + hashtag.hashtag.name }}
+  </p>
+</div>

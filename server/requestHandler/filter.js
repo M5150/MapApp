@@ -71,7 +71,7 @@ var updateFilter = function (hashtag, threshold) {
                   strength: relatedHashtags[i]['strength'],
                   count: relatedHashtags[i]['count']
                 };
-                if(ignoreTags.hasOwnProperty(relatedHashtag)){
+                if (ignoreTags.hasOwnProperty(relatedHashtag)) {
                   // add related hashtag object to result array;
                   result[relatedHashtag] = relatedHashtag;
                 }

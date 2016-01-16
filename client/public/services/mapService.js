@@ -127,6 +127,12 @@ angular.module('app.mapService', [])
     };
   };
 
+  var getRelated = function (related) {
+    return related.sort(function (a, b) {
+      return a.strength - b.strength;
+    }).slice(0, 10);
+  };
+
   var clearHeat = function () {
     HEATmap.setMap(null);
     HEATmap.setData([])
@@ -140,7 +146,8 @@ angular.module('app.mapService', [])
     clearMarkers: clearMarkers,
     deleteMarkers:deleteMarkers,
     setMapOnAll: setMapOnAll,
-    clearHeat:clearHeat
+    clearHeat:clearHeat,
+    getRelated: getRelated
   }
 }
 ]);

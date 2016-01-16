@@ -38,6 +38,17 @@ body, html{
   box-shadow: -1px 2px 3px gray;
 }
 
+.hash-toggle {
+  align-self:center;
+  width: 10px;
+  border-radius: 8px 0px 0px 8px;
+  font-size: 0.5em;
+  background-color: #edf9ff;
+  height: 50%;
+  color: gray;
+  box-shadow: -1px 2px 3px gray;
+}
+
 .toggle:focus{
   outline:none;
 }
@@ -131,11 +142,12 @@ input[type="text"], textarea, select {
 }
 
 .rightDiv {
+  display: flex;
+  flex-direction: row;
   align-self: center;
-  width: 14em;
   /*height: 50%;*/
-  margin-right: 10px;
-  margin-bottom: 50px;
+  margin-right: 0px;
+  margin-top: 47px;
 }
 
 .tweets {
@@ -175,7 +187,7 @@ hr {
   flex-direction: row;
 }
 
-.tweet-user {
+h3 {
   font-family: sans-serif;
   margin-left: 6px;
   margin-top: 5px;
@@ -184,7 +196,7 @@ hr {
   min-width: 200px;
 }
 
-.tweet-text {
+p {
   font-family: sans-serif;
   margin-left: 4px;
   margin-bottom: 4px;
@@ -224,3 +236,14 @@ hr {
   padding: 3px;
 }
 
+
+.hash-filters {
+  align-self: center;
+  width: 0px;
+  flex-direction: column;
+  margin-right: -15px;
+  background-color: #edf9ff;
+  min-height: 100px;
+  padding: 3px;
+  /*box-shadow: 0px 2px 3px gray;*/
+}

@@ -1,33 +1,33 @@
 //searchController.js
 angular.module('app.search', [])
 
-.controller('searchController', ['$scope', 'httpService', 'suggestionsService', 'mapService', function ($scope, httpService, suggestionsService, mapService){
+.controller('searchController', [
+  '$scope', 
+  'httpService', 
+  'suggestionsService', 
+  'mapService',
+  'tweetMessageService',
+  function ($scope, httpService, suggestionsService, mapService, tweetMessageService) {
+    $scope.data = {};
+    
+    $scope.getMatches = function (partial) {
+      return suggestionsService.getHashtagSuggestions(partial)
+      .then(function (data) {
+        return data.data;
+      });
+    };
 
-  $scope.data = {};
-  $scope.getMatches = function (partial) {
-    return suggestionsService.getHashtagSuggestions(partial)
-    .then(function (data) {
-      return data.data;
-    });
-  };
-
-  $scope.submitSearch = function () {
-        // deleteMarkers();
-         //heatmap.setMap(null);
-        // socket.emit("filter", $scope.searchField);
-
-        mapService.clearHeat();
-        mapService.deleteMarkers();
-
-        httpService.filterTweets($scope.data.searchText);
-        console.log($scope.data.searchText);
-        $scope.data.searchText = '';
-        
-        // heatmap = new google.maps.visualization.HeatmapLayer({
-        //   radius: 15
-        // });
-        // heatmap.setMap(window.map);
-      };
-    }
-  ]
-);
+    $scope.submitSearch = function () {
+      mapService.clearHeat();
+      mapService.deleteMarkers();
+      httpService.filterTweets($scope.data.searchText)
+        .then(function (result) {
+          if (result) {
+            tweetMessageService.showRelatedHashtags(mapService.getRelated(result.data))();
+          }
+        });
+      console.log($scope.data.searchText);
+      $scope.data.searchText = '';
+    };
+  }
+]);
